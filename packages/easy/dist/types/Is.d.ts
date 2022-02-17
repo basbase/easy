@@ -1,0 +1,18 @@
+import { Constructor } from './Constructor';
+export declare const isDefined: <T = unknown>(o?: T | undefined) => o is NonNullable<T>;
+export declare const isEmpty: (o?: unknown) => boolean;
+export declare const isNotEmpty: (o?: unknown) => boolean;
+export declare const isString: (o?: unknown) => o is string;
+export declare const isIsoDateString: (o?: unknown) => o is string;
+export declare const isBoolean: (o?: unknown) => o is boolean;
+export declare const isTrue: (o?: unknown) => boolean;
+export declare const isNumber: (o?: unknown) => o is number;
+export declare const isObject: (o?: unknown) => o is Record<string, unknown>;
+export declare const isEmptyObject: (o?: unknown) => boolean;
+export declare const isFunction: (o?: unknown) => o is (...params: unknown[]) => unknown;
+export declare const isArray: <T = any>(o?: unknown) => o is T[];
+export declare const isInstance: <T>(ctor: Constructor<T>, o?: unknown) => o is T;
+export declare const isIn: (o: unknown, values: unknown[]) => boolean;
+export declare const isIntersecting: (o?: unknown[] | undefined, values?: unknown[] | undefined) => boolean;
+export declare const isPrimitive: (o?: unknown) => boolean;
+export declare const isError: (e: unknown) => e is Error;
