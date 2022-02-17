@@ -31,7 +31,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@thisisagile/easy-test": "workspace:*",
+    "@thisisagile/easy-test": "*",
     "@types/form-urlencoded": "^4.4.0",
     "@types/jsrsasign": "^9.0.3",
     "@types/ms": "^0.7.31",
