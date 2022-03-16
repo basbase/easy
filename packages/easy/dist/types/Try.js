@@ -100,10 +100,10 @@ class Failure extends Try {
         return this;
     }
     or(value) {
-        return value;
+        return (0, Get_1.ofGet)(value);
     }
     orElse(value) {
-        return value;
+        return (0, Get_1.ofGet)(value);
     }
     orThrow(error) {
         throw (0, Constructor_1.ofConstruct)(error);

@@ -8,13 +8,13 @@ const isJson = (subject) => (0, IsA_1.isA)(subject, 'toJSON');
 exports.isJson = isJson;
 exports.json = {
     parse: (subject) => JSON.parse(JSON.stringify(subject ?? {})),
-    merge: (...subjects) => subjects.map(s => exports.json.parse(s)).reduce((js, j) => ({ ...js, ...j }), {}),
+    merge: (...subjects) => exports.json.parse(subjects.map(s => (0, exports.asJson)(s, s => exports.json.parse(s))).reduce((js, j) => ({ ...js, ...j }), {})),
     omit: (subject, ...keys) => keys.reduce((js, k) => {
         delete js[k];
         return js;
     }, exports.json.parse(subject)),
 };
 exports.toJson = exports.json.merge;
-const asJson = (j, alt = {}) => ((0, exports.isJson)(j) ? j.toJSON() : (0, Is_1.isObject)(j) ? j : (0, Get_1.ofGet)(alt));
+const asJson = (j, alt = {}) => ((0, exports.isJson)(j) ? j.toJSON() : (0, Is_1.isObject)(j) ? j : (0, Get_1.ofGet)(alt, j));
 exports.asJson = asJson;
 //# sourceMappingURL=Json.js.map

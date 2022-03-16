@@ -29,6 +29,7 @@ __exportStar(require("./Json"), exports);
 __exportStar(require("./List"), exports);
 __exportStar(require("./Message"), exports);
 __exportStar(require("./Meta"), exports);
+__exportStar(require("./Number"), exports);
 __exportStar(require("./Result"), exports);
 __exportStar(require("./Results"), exports);
 __exportStar(require("./Tag"), exports);

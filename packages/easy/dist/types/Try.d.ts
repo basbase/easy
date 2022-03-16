@@ -24,8 +24,8 @@ declare abstract class Try<T = unknown> implements Validatable {
     abstract recoverFrom(type: Constructor<Error>, f: Func<T | Try<T>, Error>): Try<T>;
     abstract accept(f: Func<void, T>): Try<T>;
     abstract filter(predicate: Func<boolean, T>): Try<T>;
-    abstract or(value: T): T;
-    abstract orElse(value?: T): T | undefined;
+    abstract or(value: Get<T>): T;
+    abstract orElse(value?: Get<T>): T | undefined;
     abstract orThrow(error: Construct<Error>): T;
 }
 export declare const tryTo: <T>(c: Get<T | Try<T>, any>, ...args: unknown[]) => Try<T>;

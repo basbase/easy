@@ -13,6 +13,8 @@ export declare class Table extends Mapper {
         column: <T = unknown>(name: string, options?: PropertyOptions<T> | undefined) => Column;
         item: (property: string, options?: PropertyOptions<unknown> | undefined) => import("../utils").Property<unknown>;
         ignore: (property?: string) => import("../utils").Mapping;
+        skipIn: (property?: string) => import("../utils").Mapping;
+        skipOut: (property?: string) => import("../utils").Mapping;
         func: (property: string, funcIn: import("../types").Get<import("../types").JsonValue | undefined, Json>, funcOut: import("../types").Get<import("../types").JsonValue | undefined, Json>) => import("../utils").Mapping;
         add: (funcIn: import("../types").Get<import("../types").JsonValue, Json>) => import("../utils").Mapping;
         map: (mapper: import("../types").Construct<Mapper>, property?: string) => import("../utils").Mapping;

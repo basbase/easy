@@ -10,8 +10,8 @@ const validators = (subject) => (0, types_1.meta)(subject)
     .keys('constraint')
     .reduce((list, vs) => list.add(vs), (0, types_1.toList)());
 const runValidator = (v, subject) => (0, types_1.tryTo)(() => subject[v.property])
-    .map(actual => v.constraint(actual))
-    .map(res => ((0, types_1.isResults)(res) ? res : !res ? (0, exports.asResults)(subject, v.text, v) : (0, types_1.toResults)()))
+    .map(actual => [actual, v.constraint(actual)])
+    .map(([actual, res]) => ((0, types_1.isResults)(res) ? res : !res ? (0, exports.asResults)(subject, v.text, { ...v, actual }) : (0, types_1.toResults)()))
     .recover(e => (0, exports.asResults)(subject, (0, types_1.asString)(e))).value;
 const constraints = (subject) => (0, types_1.tryTo)(() => validators(subject))
     .map(vs => vs.mapDefined(v => runValidator(v, subject)))

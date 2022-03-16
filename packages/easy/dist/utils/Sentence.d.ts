@@ -1,5 +1,5 @@
 import { Id, Text } from '../types';
-export declare class Sentence {
+export declare class Sentence implements Text {
     private sentence;
     constructor(word: Text, pre?: Sentence, sentence?: Text[]);
     toString(): string;

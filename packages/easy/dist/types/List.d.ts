@@ -16,9 +16,11 @@ export declare class List<T = unknown> extends Array<T> {
     toJSON: () => Json[];
     map: <U>(f: (value: T, index: number, array: T[]) => U, params?: unknown) => List<U>;
     mapDefined: <U>(f: (value: T, index: number, array: T[]) => U, params?: unknown) => List<NonNullable<U>>;
+    mapAsync: (f: (i: T) => Promise<T>) => Promise<List<T>>;
     distinct: () => List<T>;
     filter: (p: (value: T, index: number, array: T[]) => unknown, params?: unknown) => List<T>;
-    byId: (id: Id) => List<T>;
+    sum: (p: (t: T) => number) => number;
+    byId: (id: Id) => T;
     add: (...items: (T | T[])[]) => this;
     remove: (item: T) => List<T>;
     switch: (item: T) => List<T>;
@@ -28,4 +30,4 @@ export declare class List<T = unknown> extends Array<T> {
 }
 export declare const toList: <T = unknown>(...items: ArrayLike<T>) => List<T>;
 export declare const isList: <T>(l?: unknown) => l is List<T>;
-export declare const asList: <T>(c: Constructor<T>, items?: unknown[]) => List<T>;
+export declare const asList: <T>(c: Constructor<T>, items?: unknown | unknown[]) => List<T>;

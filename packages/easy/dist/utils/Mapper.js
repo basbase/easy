@@ -4,6 +4,7 @@ exports.mappings = exports.Mapper = exports.isMapping = void 0;
 const types_1 = require("../types");
 const Property_1 = require("./Property");
 const State_1 = require("./State");
+const If_1 = require("./If");
 const isMapping = (m) => (0, types_1.isA)(m, 'in', 'out');
 exports.isMapping = isMapping;
 class Mapper extends State_1.State {
@@ -22,7 +23,7 @@ class Mapper extends State_1.State {
         return this.get('keys', () => this.properties.map(([k]) => k));
     }
     get columns() {
-        return this.get('columns', () => this.properties.map(([, p]) => p.property ?? ''));
+        return this.get('columns', () => this.properties.mapDefined(([, p]) => (0, If_1.ifNotEmpty)(p.property, p.property))).distinct();
     }
     get droppedIn() {
         return this.get('droppedIn', () => this.columns.filter(c => !this.keys.some(k => k === c)));
@@ -46,6 +47,16 @@ exports.mappings = {
     ignore: (property = '') => ({
         property,
         in: () => undefined,
+        out: () => undefined,
+    }),
+    skipIn: (property = '') => ({
+        property,
+        in: () => undefined,
+        out: (source = {}) => source[property],
+    }),
+    skipOut: (property = '') => ({
+        property,
+        in: (source = {}, key = '') => source[key],
         out: () => undefined,
     }),
     func: (property, funcIn, funcOut) => ({

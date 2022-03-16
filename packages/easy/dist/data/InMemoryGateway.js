@@ -15,7 +15,7 @@ class InMemoryGateway extends types_1.Gateway {
         return this.data.then(d => (0, types_1.toList)(d));
     }
     byId(id) {
-        return this.data.then(d => d.first(i => i.id === id)).then(d => (d ? { ...d } : undefined));
+        return this.data.then(d => d.byId(id)).then(d => (d ? { ...d } : undefined));
     }
     exists(id) {
         return this.byId(id).then(d => (0, types_1.isDefined)(d));

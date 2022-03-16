@@ -6,6 +6,7 @@ const Json_1 = require("./Json");
 const Is_1 = require("./Is");
 const IsA_1 = require("./IsA");
 const Get_1 = require("./Get");
+const Text_1 = require("./Text");
 class List extends Array {
     constructor() {
         super(...arguments);
@@ -24,9 +25,11 @@ class List extends Array {
         }, new Array());
         this.map = (f, params) => (0, exports.toList)(super.map(f, params));
         this.mapDefined = (f, params) => this.map(f, params).defined();
+        this.mapAsync = (f) => Promise.all(super.map(e => f(e))).then(a => (0, exports.toList)(a));
         this.distinct = () => this.filter((i, index) => this.indexOf(i) === index);
         this.filter = (p, params) => (0, exports.toList)(super.filter(p, params));
-        this.byId = (id) => this.filter(i => i.id === id);
+        this.sum = (p) => this.reduce((sum, i) => sum + p(i), 0);
+        this.byId = (id) => this.first(i => (0, Text_1.asString)(i.id) === (0, Text_1.asString)(id));
         this.add = (...items) => {
             super.push(...(0, Array_1.toArray)(...items));
             return this;
@@ -49,6 +52,6 @@ const toList = (...items) => new List(...(0, Array_1.toArray)(...items));
 exports.toList = toList;
 const isList = (l) => (0, Is_1.isDefined)(l) && (0, Is_1.isArray)(l) && (0, IsA_1.isA)(l, 'first', 'last', 'asc', 'desc');
 exports.isList = isList;
-const asList = (c, items = []) => (0, exports.toList)(items.map(i => new c(i)));
+const asList = (c, items = []) => (0, exports.toList)((0, Array_1.toArray)(items).map(i => new c(i)));
 exports.asList = asList;
 //# sourceMappingURL=List.js.map

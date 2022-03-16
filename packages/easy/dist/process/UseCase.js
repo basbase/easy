@@ -7,10 +7,10 @@ class UseCase extends types_1.Enum {
         super(name, id.toString());
         this.app = app;
         this.scopes = scopes;
-        this.with = (...s) => {
-            this.scopes.add(...s);
-            return this;
-        };
+    }
+    with(...s) {
+        this.scopes.add(...s);
+        return this;
     }
     static byScopes(...s) {
         return this.filter(u => u.scopes.some(us => (0, types_1.isIn)(us, s)));
